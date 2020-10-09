@@ -3,10 +3,13 @@ import logging
 from flask import Flask, request, jsonify, render_template
 import pandas as pd
 from PIL import Image, ImageDraw, ImageFont
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app, support_credentials=True) 
 
 @app.route("/generate_certificate", methods=['GET', 'POST'])
+@cross_origin(support_credentials=True)
 def generate_certificate():
     today = date.today()
     dayform = today.strftime("%B %d, %Y")
