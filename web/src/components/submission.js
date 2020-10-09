@@ -24,7 +24,7 @@ export const Submission = () => {
       <Row gutter={16} style={{ marginBottom: 16 }}>
         <Col span={8}>
           <Card
-            title="Program 1"
+            title="Finance for Future"
             bordered={false} // TODO: make it firestore
           >
             <Button type="primary" size="small">
@@ -33,16 +33,16 @@ export const Submission = () => {
           </Card>
         </Col>
         <Col span={8}>
-          <Card title="Program 2" bordered={false}>
+          <Card title="Job_shadowing" bordered={false}>
             <Button type="primary" size="small">
-              view details
+            <Link to="/submissionTasks">View Details</Link>
             </Button>
           </Card>
         </Col>
         <Col span={8}>
-          <Card title="Program 3" bordered={false}>
+          <Card title="Planning with Purpose" bordered={false}>
             <Button type="primary" size="small">
-              view details
+            <Link to="/submissionTasks">View Details</Link>
             </Button>
           </Card>
         </Col>
@@ -50,9 +50,9 @@ export const Submission = () => {
 
       <Row gutter={16}>
         <Col span={8}>
-          <Card title="Program 4" bordered={false}>
+          <Card title="Personal Spending 101" bordered={false}>
             <Button type="primary" size="small">
-              view details
+            <Link to="/submissionTasks">View Details</Link>
             </Button>
           </Card>
         </Col>
