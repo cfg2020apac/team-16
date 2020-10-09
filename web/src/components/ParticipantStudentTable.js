@@ -152,31 +152,27 @@ class ParticipantStudentTable extends React.Component {
     });
     const { selectedRowKeys, subject, body } = this.state;
     const requestBody = {
-      email: selectedRowKeys,
+      emails: selectedRowKeys,
       subject: subject,
-      body: body,
+      message: body,
     };
     const requestOptions = {
       method: "POST",
       headers: {
-        dataType: "json",
-        xhrFields: {
-          withCredentials: true,
-        },
-        crossDomain: true,
-        contentType: "application/json; charset=utf-8",
+        'Content-Type': 'application/json'
       },
-      body: requestBody, 
+      body: JSON.stringify(requestBody),
     };
-    fetch("http://127.0.0.1:5000/send_message", requestOptions).then(
-      (result) => {
+
+    fetch("http://127.0.0.1:5000/send_message", requestOptions)
+      .then((result) => {
         console.log("result");
         this.setState({
           visible: false,
           confirmLoading: false,
         });
-      }
-    );
+      })
+      .catch((error) => console.error(error));
   };
 
   handleCancel = () => {
