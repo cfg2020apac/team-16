@@ -53,33 +53,6 @@ for (let i = 0; i < 46; i++) {
     email: "kingedward@gmail.com",
   });
 }
-
-function getStudents() {
-  let studentRef = FirebaseDB.collection("student");
-  let students = [];
-  studentRef.get().then((snapshot) => {
-    Promise.all(
-      snapshot.docs.map((child) => {
-        const id = child.id;
-        const data = child.data();
-        const progRef = data.enrolled_proj;
-        let student = {
-          id,
-          name: data.name,
-          email: data.email_addr,
-          progress: data.progress,
-          key: data.email_addr,
-        };
-        progRef.get().then((res) => {
-          const progData = res.data();
-          student["program"] = progData.name;
-        });
-        students.push(student);
-      })
-    );
-  });
-  return students;
-}
 class ParticipantStudentTable extends React.Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
@@ -104,7 +77,6 @@ class ParticipantStudentTable extends React.Component {
   };
 
   onSelectChange = (selectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
     this.setState({ selectedRowKeys });
   };
 
@@ -126,17 +98,19 @@ class ParticipantStudentTable extends React.Component {
           };
           students.push(student);
         })
-      );
-      Promise.all(
-        students.map((student) => {
-          const progRef = student.progRef;
-          progRef.get().then((res) => {
-            const progData = res.data();
-            student["program"] = progData.name;
-          });
-        })
-      );
-      this.setState({ students });
+      )
+        .then(
+          Promise.all(
+            students.map((student) => {
+              const progRef = student.progRef;
+              progRef.get().then((res) => {
+                const progData = res.data();
+                student["program"] = progData.name;
+              });
+            })
+          )
+        )
+        .then(this.setState({ students }));
     });
   }
 
@@ -159,7 +133,7 @@ class ParticipantStudentTable extends React.Component {
     const requestOptions = {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
     };
@@ -182,10 +156,33 @@ class ParticipantStudentTable extends React.Component {
     });
   };
 
+  generateCertificates = () => {
+    let participants = [];
+    this.state.selectedRowKeys.forEach((email) => {
+      let selectedObj = this.state.students.filter((obj) => obj.key == email);
+      participants.push(selectedObj[0].name);
+    });
+    const requestBody = { 
+      "participants" : participants
+    }
+    const requestOptions = { 
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    }
+    fetch("http://127.0.0.1:5000/generate_certificate", requestOptions)
+    .then((result) => { 
+      console.log("result")
+    })
+  };
+
   render() {
     const {
       loading,
       selectedRowKeys,
+      selectedNames,
       students,
       changed,
       visible,
@@ -251,6 +248,7 @@ class ParticipantStudentTable extends React.Component {
               type="primary"
               icon={<IconFont type="icon-facebook" />}
               size="large"
+              onClick={this.generateCertificates}
             >
               Send Certificates
             </Button>

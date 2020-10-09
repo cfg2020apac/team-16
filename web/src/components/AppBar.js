@@ -1,14 +1,18 @@
 import React, { Children } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from "antd";
-import { UserOutlined, NotificationOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  NotificationOutlined,
+  ProjectOutlined,
+} from "@ant-design/icons";
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 export const AppBar = ({ children, location }) => {
   const baseLength = process.env.PUBLIC_URL.length;
-const currentRoute = location.pathname.slice(baseLength);
+  const currentRoute = location.pathname.slice(baseLength);
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Header className="header">
@@ -24,14 +28,18 @@ const currentRoute = location.pathname.slice(baseLength);
           <Menu
             mode="inline"
             defaultSelectedKeys={[currentRoute]}
-              selectedKeys={[currentRoute]}
+            selectedKeys={[currentRoute]}
             style={{ height: "100%", borderRight: 0 }}
           >
-            <SubMenu key="sub1" icon={<UserOutlined />} title="Programs">
+            <SubMenu key="sub1" icon={<ProjectOutlined />} title="Programs">
               <Menu.Item key="1">Create Event</Menu.Item>
               <Menu.Item key="/events"><Link to="/calendar">Events</Link></Menu.Item>
-              <Menu.Item key="/progress"><Link to="/progress">Progress</Link></Menu.Item>
-              <Menu.Item key="4">Submissions</Menu.Item>
+              <Menu.Item key="/progress">
+                <Link to="/progress">Progress</Link>
+              </Menu.Item>
+              <Menu.Item key="/submissions">
+                <Link to="/submissions">Submissions</Link>
+              </Menu.Item>
             </SubMenu>
             <Menu.Item key="/students/participants" icon={<UserOutlined />}>
               <Link to="/students/participants">Students</Link>

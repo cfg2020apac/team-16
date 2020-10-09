@@ -6,6 +6,8 @@ import { ParticipantStudents } from "./components/ParticipantStudents";
 import CalendarComponent from "./components/CalendarComponent";
 import AnotherCalendarComponent from "./components/AnotherCalendarComponent";
 import { ProjectProgress } from "./components/Progress";
+import { Submission } from "./components/submission"
+import { SubmissionTasks } from "./components/SubmissionTasks"
 
 export const Routes = () => {
   return (
@@ -17,6 +19,8 @@ export const Routes = () => {
           <Route path="/anothercalendar" component={AnotherCalendarComponent} />
           <Route exact path="/students/participants" component={ParticipantStudents} />
           <Route exact path="/progress" component={ProjectProgress} />
+          <Route exact path="/submissions" component={Submission} />
+          <Route path="/submissionTasks" component={SubmissionTasks} />
         </AppBar>
       </Switch>
     </Router>
