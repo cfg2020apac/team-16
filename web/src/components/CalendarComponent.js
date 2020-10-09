@@ -16,7 +16,7 @@ const {
 } = googleCalendarConfig;
 
 
-BigCalendar.setLocalizer(
+const localizer = BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
 );
 
@@ -79,7 +79,8 @@ const TimeRelatedForm = () => {
                     { 'method': 'email', 'minutes': 24 * 60 },
                     { 'method': 'popup', 'minutes': 10 }
                 ]
-            }
+            },
+            "colorId": values["program-select"]
         }
 
         gapi.load("client:auth2", () => {
@@ -101,7 +102,7 @@ const TimeRelatedForm = () => {
 
                 request.execute(event => {
                     console.log(event);
-                    window.location.reload();
+                    // window.location.reload();
                 })
             });
         });
@@ -120,22 +121,22 @@ const TimeRelatedForm = () => {
             </Form.Item>
             <Form.Item name="program-select" label="Program Select" {...config}>
                 <Select>
-                    <Select.Option value="program-1">Program 1</Select.Option>
-                    <Select.Option value="program-2">Program 2</Select.Option>
-                    <Select.Option value="program-3">Program 3</Select.Option>
-                    <Select.Option value="program-4">Program 4</Select.Option>
-                    <Select.Option value="program-5">Program 5</Select.Option>
-                    <Select.Option value="program-6">Program 6</Select.Option>
-                    <Select.Option value="program-7">Program 7</Select.Option>
-                    <Select.Option value="program-8">Program 8</Select.Option>
-                    <Select.Option value="program-9">Program 9</Select.Option>
-                    <Select.Option value="program-10">Program 10</Select.Option>
-                    <Select.Option value="program-11">Program 11</Select.Option>
-                    <Select.Option value="program-12">Program 12</Select.Option>
-                    <Select.Option value="program-13">Program 13</Select.Option>
-                    <Select.Option value="program-14">Program 14</Select.Option>
-                    <Select.Option value="program-15">Program 15</Select.Option>
-                    <Select.Option value="program-16">Program 16</Select.Option>
+                    <Select.Option value="1">Program 1</Select.Option>
+                    <Select.Option value="2">Program 2</Select.Option>
+                    <Select.Option value="3">Program 3</Select.Option>
+                    <Select.Option value="4">Program 4</Select.Option>
+                    <Select.Option value="5">Program 5</Select.Option>
+                    <Select.Option value="6">Program 6</Select.Option>
+                    <Select.Option value="7">Program 7</Select.Option>
+                    <Select.Option value="8">Program 8</Select.Option>
+                    <Select.Option value="9">Program 9</Select.Option>
+                    <Select.Option value="10">Program 10</Select.Option>
+                    <Select.Option value="11">Program 11</Select.Option>
+                    <Select.Option value="12">Program 12</Select.Option>
+                    <Select.Option value="13">Program 13</Select.Option>
+                    <Select.Option value="14">Program 14</Select.Option>
+                    <Select.Option value="15">Program 15</Select.Option>
+                    <Select.Option value="16">Program 16</Select.Option>
                 </Select>
             </Form.Item>
             <Form.Item name={['description']} label="Description">
@@ -167,19 +168,60 @@ class CalendarComponent extends React.Component {
         this.state = {
             events: []
         };
+
+        this.getColorById = this.getColorById.bind(this);
     }
 
     componentDidMount() {
         getEvents(events => {
-            this.setState({ events });
+            let parsedEvents = events.map(e => (
+                {
+                    title: e.title,
+                    start: new Date(e.start),
+                    end: new Date(e.end),
+                    bgColor: this.getColorById(e.colorId)
+                }
+            ));
+            this.setState({ events: parsedEvents });
         });
         console.log(this.state.events);
     }
 
+    getColorById(colorId) {
+        console.log(colorId);
+        switch (colorId) {
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+                return "#0c6133";
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+                return "#beef9e";
+            case '9':
+            case '10':
+            case '11':
+            case '12':
+                return "#a6c36f"
+            case '13':
+            case '14':
+            case '15':
+            case '16':
+                return "#d3c1c3";
+            default:
+                return "#faa381"
+        }
+    }
+
     render() {
         return (
-            <Row style={{background:"#fff", padding:"15px 20px", height:"80vh"}}>
-                <Col span={18} style={{ minHeight: '70vh' }}><BigCalendar events={this.state.events} /></Col>
+            <Row style={{ background: "#fff", padding: "15px 20px", height: "80vh" }}>
+                <Col span={18} style={{ minHeight: '70vh' }}><BigCalendar events={this.state.events} localizer={localizer}
+                    startAccessor="start"
+                    endAccessor="end"
+                    defaultView="month" /></Col>
                 <Col span={6} style={{ marginTop: 100 }}><TimeRelatedForm /></Col>
             </Row>
         );
