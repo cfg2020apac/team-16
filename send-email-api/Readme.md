@@ -1,3 +1,5 @@
+Plz smtp server errro need to let goolge allow the less authenticate app by google config
+
 Request body:
 {
     "emails": ["xxx@gmail.com", "xx@gmail.com"],

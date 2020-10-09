@@ -22,13 +22,13 @@ def index():
    request_data = request.get_json()
 
    new_store = {
-      'email': request_data['email'],
+      'emails': request_data['emails'],
       'subject': request_data['subject'],
       'message': request_data['message']
    }
 
    for email in new_store['emails']:
-      msg = Message(new_store['subject'], sender=os.getenv('EMAILUSERNAME'), recipients=[new_store['email']])
+      msg = Message(new_store['subject'], sender=os.getenv('EMAILUSERNAME'), recipients=[email])
       msg.body = new_store['message']
       mail.send(msg)
    return "Sent"
