@@ -105,26 +105,30 @@ class ParticipantStudentTable extends React.Component {
     let studentRef = FirebaseDB.collection("student");
     let students = [];
     studentRef.get().then((snapshot) => {
-      snapshot.forEach((child) => {
-        const id = child.id;
-        let data = child.data();
-        let student = {
-          id,
-          name: data.name,
-          email: data.email_addr,
-          progress: data.progress,
-          key: data.email_addr,
-          progRef: data.enrolled_proj,
-        };
-        students.push(student);
-      });
-      students.forEach((student) => {
-        const progRef = student.progRef;
-        progRef.get().then((res) => {
-          const progData = res.data();
-          student["program"] = progData.name;
-        });
-      });
+      Promise.all(
+        snapshot.docs.map((child) => {
+          const id = child.id;
+          let data = child.data();
+          let student = {
+            id,
+            name: data.name,
+            email: data.email_addr,
+            progress: data.progress,
+            key: data.email_addr,
+            progRef: data.enrolled_proj,
+          };
+          students.push(student);
+        })
+      );
+      Promise.all(
+        students.map((student) => {
+          const progRef = student.progRef;
+          progRef.get().then((res) => {
+            const progData = res.data();
+            student["program"] = progData.name;
+          });
+        })
+      );
       this.setState({ students });
     });
   }
