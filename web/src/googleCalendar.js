@@ -2,9 +2,6 @@ import googleCalendarConfig from "./constants/googleCalendar";
 import request from "superagent";
 
 const {
-    clientId,
-    clientSecret,
-    refreshToken,
     apiKey,
     calendarId
 } = googleCalendarConfig;
