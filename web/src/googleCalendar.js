@@ -19,7 +19,7 @@ export function getEvents(callback) {
                         start: event.start.date || event.start.dateTime,
                         end: event.end.date || event.end.dateTime,
                         title: event.summary,
-                        colorId: event.colorId || (Math.floor(Math.random() * 4) + 1).toString()
+                        colorId: event.colorId || (Math.floor(Math.random() * 16) + 1).toString()
                     })
                 })
                 callback(events)

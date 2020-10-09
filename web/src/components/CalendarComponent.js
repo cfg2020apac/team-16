@@ -102,7 +102,7 @@ const TimeRelatedForm = () => {
 
                 request.execute(event => {
                     console.log(event);
-                    // window.location.reload();
+                    window.location.reload();
                 })
             });
         });
