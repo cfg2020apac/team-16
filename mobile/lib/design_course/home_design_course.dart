@@ -1,6 +1,7 @@
 import 'package:best_flutter_ui_templates/design_course/category_list_view.dart';
 import 'package:best_flutter_ui_templates/design_course/course_info_screen.dart';
 import 'package:best_flutter_ui_templates/design_course/popular_course_list_view.dart';
+import 'package:best_flutter_ui_templates/design_course/programs.dart';
 import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/material.dart';
 import 'design_course_app_theme.dart';
@@ -12,6 +13,7 @@ class DesignCourseHomeScreen extends StatefulWidget {
 
 class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
   CategoryType categoryType = CategoryType.ui;
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  height: MediaQuery.of(context).size.height,
+                  height: MediaQuery.of(context).size.height+100,
                   child: Column(
                     children: <Widget>[
                       getSearchBarUI(),
@@ -43,6 +45,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             ),
           ],
         ),
+       
       ),
     );
   }
@@ -54,40 +57,44 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
-          child: Text(
-            'Category',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 22,
-              letterSpacing: 0.27,
-              color: DesignCourseAppTheme.darkerText,
-            ),
+          child: Row(
+            children: [
+              Text(
+                'Your Program Progress',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 22,
+                  letterSpacing: 0.27,
+                  color: DesignCourseAppTheme.darkerText,
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(
           height: 16,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Row(
-            children: <Widget>[
-              getButtonUI(CategoryType.ui, categoryType == CategoryType.ui),
-              const SizedBox(
-                width: 16,
-              ),
-              getButtonUI(
-                  CategoryType.coding, categoryType == CategoryType.coding),
-              const SizedBox(
-                width: 16,
-              ),
-              getButtonUI(
-                  CategoryType.basic, categoryType == CategoryType.basic),
-            ],
-          ),
+          padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
+          child: LinearProgressIndicator(backgroundColor: DesignCourseAppTheme.nearlyBlue, value: 0.8, minHeight: 16),
         ),
+       
         const SizedBox(
           height: 16,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
+          child: Text(
+                  'Next To Do',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 22,
+                    letterSpacing: 0.27,
+                    color: DesignCourseAppTheme.darkerText,
+                  ),
+                ),
         ),
         CategoryListView(
           callBack: () {
@@ -106,7 +113,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Popular Course',
+            'Coming Events',
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -270,7 +277,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Choose your',
+                  'Hello',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -280,7 +287,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                   ),
                 ),
                 Text(
-                  'Design Course',
+                  'Chan Tai Man',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -302,6 +309,45 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     );
   }
 }
+ Widget getAppBarUI() {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Hello',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                  letterSpacing: 0.2,
+                  color: DesignCourseAppTheme.grey,
+                ),
+              ),
+              Text(
+                'Chan Tai Man',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                  letterSpacing: 0.27,
+                  color: DesignCourseAppTheme.darkerText,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: 60,
+          height: 60,
+          child: Image.asset('assets/design_course/userImage.png'),
+        )
+      ],
+    );
+  }
 
 enum CategoryType {
   ui,
