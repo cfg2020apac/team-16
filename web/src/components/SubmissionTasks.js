@@ -7,18 +7,18 @@ const gridStyle = {
     textAlign: 'center',
   };
 
-export const submission = () => {
+export const SubmissionTasks = () => {
     return (
     <div className="site-card-wrapper">
-        <Card title="Card Title" noHovering>
-    <Card.Grid style={gridStyle}>Task1</Card.Grid>
-    <Card.Grid style={gridStyle}>Task2</Card.Grid>
-    <Card.Grid style={gridStyle}>Task3</Card.Grid>
-    <Card.Grid style={gridStyle}>Task4</Card.Grid>
-    <Card.Grid style={gridStyle}>Task5</Card.Grid>
-    <Card.Grid style={gridStyle}>Task6</Card.Grid>
-    <Card.Grid style={gridStyle}>Task7</Card.Grid>
-  </Card>
+    <Card title="Program Name" noHovering>
+        <Card.Grid style={gridStyle}>Task1</Card.Grid>
+        <Card.Grid style={gridStyle}>Task2</Card.Grid>
+        <Card.Grid style={gridStyle}>Task3</Card.Grid>
+        <Card.Grid style={gridStyle}>Task4</Card.Grid>
+        <Card.Grid style={gridStyle}>Task5</Card.Grid>
+        <Card.Grid style={gridStyle}>Task6</Card.Grid>
+        <Card.Grid style={gridStyle}>Task7</Card.Grid>
+    </Card>
     </div>
     );
 };
