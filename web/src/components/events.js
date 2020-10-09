@@ -3,8 +3,15 @@ export default [
     'title': 'All Day Event very long title',
     'bgColor': '#ff7f50',
     'allDay': true,
-    'start': new Date(2020, 10, 0),
+    'start': new Date(2020, 10, 1),
     'end': new Date(2020, 10, 1)
+  },
+  {
+    'title': 'Blablabla',
+    'bgColor': '#ff7f50',
+    'allDay': true,
+    'start': "2020-10-3",
+    'end': "2020-10-4"
   },
   {
     'title': 'Long Event',
