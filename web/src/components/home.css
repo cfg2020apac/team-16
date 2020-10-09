@@ -10,7 +10,7 @@
     width: auto;
     height: 100vh;
     
-    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://gdurl.com/gJJK");
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://i.ibb.co/bmHkz8C/background.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -83,12 +83,12 @@
     border-color: white;
   }
   .menu ul li:nth-child(5) a {
-    color: #fff200;
-    border: 1px solid #fff200;
+    color: #0C6133;
+    border: 1px solid #0C6133;
   }
   .menu ul li:nth-child(5) a:hover {
     color: black;
-    background-color: #fff200;
+    background-color: #0C6133;
   }
   .header {
     text-align: center;
@@ -113,8 +113,8 @@
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: 0.15rem;
-    color: black;
-    background-color: #fff200;
+    color: #0C6133;
+    background-color: #89b60d;
     padding: 20px 30px;
     margin: 30px 15px 0;
     border: none;
