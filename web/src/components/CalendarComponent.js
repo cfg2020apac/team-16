@@ -83,7 +83,6 @@ const TimeRelatedForm = () => {
         }
 
         gapi.load("client:auth2", () => {
-            console.log("Loaded client");
 
             gapi.client.init({
                 apiKey: apiKey,
@@ -102,6 +101,7 @@ const TimeRelatedForm = () => {
 
                 request.execute(event => {
                     console.log(event);
+                    window.location.reload();
                 })
             });
         });
