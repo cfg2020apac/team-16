@@ -30,7 +30,7 @@ const currentRoute = location.pathname.slice(baseLength);
             <SubMenu key="sub1" icon={<UserOutlined />} title="Programs">
               <Menu.Item key="1">Create Event</Menu.Item>
               <Menu.Item key="2">Events</Menu.Item>
-              <Menu.Item key="3">Progress</Menu.Item>
+              <Menu.Item key="/progress"><Link to="/progress">Progress</Link></Menu.Item>
               <Menu.Item key="4">Submissions</Menu.Item>
             </SubMenu>
             <Menu.Item key="/students/participants" icon={<UserOutlined />}>
