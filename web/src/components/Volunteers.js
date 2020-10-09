@@ -175,12 +175,22 @@ class Volunteers extends React.Component {
       },
       body: JSON.stringify(requestBody),
     };
-    fetch("http://127.0.0.1:5000/generate_certificate", requestOptions).then(
-      (result) => {
-        console.log("result");
-        this.success();
-      }
-    );
+    fetch("http://127.0.0.1:5001/generate_certificate", requestOptions).then(
+        (result) => {
+          console.log("result");
+          this.success();
+        }
+      ).then(
+        res => {
+          console.log("here"); 
+          return fetch("http://127.0.0.1:5001/uploadgdrive")
+        }
+      )
+      .then( 
+        (res) => { 
+          console.log(res)
+        }
+      )
   };
 
   render() {
