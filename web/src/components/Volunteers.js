@@ -39,14 +39,6 @@ const columns = [
     title: "Email",
     dataIndex: "email",
   },
-  {
-    title: "Progress",
-    dataIndex: "progress",
-    sorter: (a, b) => a.progress - b.progress,
-    render: (text, record) => (
-      <Progress percent={record.progress} status="active" />
-    ),
-  },
 ];
 
 const data = [];
@@ -59,12 +51,11 @@ for (let i = 0; i < 46; i++) {
     email: "kingedward@gmail.com",
   });
 }
-class ParticipantStudentTable extends React.Component {
+class Volunteers extends React.Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
     loading: false,
-    students: [],
-    ModalText: "Content of the modal",
+    volunteers: [],
     visible: false,
     confirmLoading: false,
     subject: "",
@@ -91,30 +82,29 @@ class ParticipantStudentTable extends React.Component {
   };
 
   componentDidMount() {
-    let studentRef = FirebaseDB.collection("student");
-    let students = [];
+    let studentRef = FirebaseDB.collection("volunteers");
+    let volunteers = [];
     studentRef
-      .where("status", "==", "current")
+      .where("status", "==", "Participant")
       .get()
       .then((snapshot) => {
         Promise.all(
           snapshot.docs.map((child) => {
             const id = child.id;
             let data = child.data();
-            let student = {
+            let volunteer = {
               id,
               name: data.name,
               email: data.email_addr,
-              progress: data.progress,
               key: data.email_addr,
-              progRef: data.enrolled_proj,
+              progRef: data.program,
             };
-            students.push(student);
+            volunteers.push(volunteer);
           })
         )
           .then(
             Promise.all(
-              students.map((student) => {
+              volunteers.map((student) => {
                 const progRef = student.progRef;
                 progRef.get().then((res) => {
                   const progData = res.data();
@@ -123,7 +113,7 @@ class ParticipantStudentTable extends React.Component {
               })
             )
           )
-          .then(this.setState({ students }));
+          .then(this.setState({ volunteers }));
       });
   }
 
@@ -198,7 +188,7 @@ class ParticipantStudentTable extends React.Component {
       loading,
       selectedRowKeys,
       selectedNames,
-      students,
+      volunteers,
       changed,
       visible,
       confirmLoading,
@@ -275,11 +265,11 @@ class ParticipantStudentTable extends React.Component {
         <Table
           rowSelection={rowSelection}
           columns={columns}
-          dataSource={students}
+          dataSource={volunteers}
         />
       </div>
     );
   }
 }
 
-export default ParticipantStudentTable;
+export default Volunteers;
