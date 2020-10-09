@@ -178,10 +178,13 @@ class CalendarComponent extends React.Component {
 
     render() {
         return (
+            <>
+            <h1 style={{fontSize:"32px", fontWeight:"bold"}}>Events</h1>
             <Row style={{background:"#fff", padding:"15px 20px", height:"80vh"}}>
                 <Col span={18} style={{ minHeight: '70vh' }}><BigCalendar events={this.state.events} /></Col>
                 <Col span={6} style={{ marginTop: 100 }}><TimeRelatedForm /></Col>
             </Row>
+            </>
         );
     }
 }

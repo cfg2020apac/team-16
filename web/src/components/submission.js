@@ -16,47 +16,43 @@ function getPrograms() {
     return programs;
   });
 }
+const data = [
+  "Finance for Future",
+  "Job Shadowing",
+  "Planning with Purpose",
+  "Personal Spending 101",
+];
 const programs = getPrograms();
 
 export const Submission = () => {
   return (
-    <div className="site-card-wrapper">
-      <Row gutter={16} style={{ marginBottom: 16 }}>
-        <Col span={8}>
-          <Card
-            title="Finance for Future"
-            bordered={false} // TODO: make it firestore
-          >
-            <Button type="primary" size="small">
-              <Link to="/submissionTasks">View Details</Link>
-            </Button>
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card title="Job_shadowing" bordered={false}>
-            <Button type="primary" size="small">
-            <Link to="/submissionTasks">View Details</Link>
-            </Button>
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card title="Planning with Purpose" bordered={false}>
-            <Button type="primary" size="small">
-            <Link to="/submissionTasks">View Details</Link>
-            </Button>
-          </Card>
-        </Col>
-      </Row>
-
-      <Row gutter={16}>
-        <Col span={8}>
-          <Card title="Personal Spending 101" bordered={false}>
-            <Button type="primary" size="small">
-            <Link to="/submissionTasks">View Details</Link>
-            </Button>
-          </Card>
-        </Col>
-      </Row>
-    </div>
+    <>
+      <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>Choose a Program</h1>
+      <div className="site-card-wrapper" style={{display:"flex", flexWrap:"wrap"}}>
+        {/* <Row gutter={16} style={{ marginBottom: 16 }}> */}
+        {data.map((title) => (
+          <Col span={7} style={{marginRight:"10px", marginBottom:"10px"}}>
+            <Card
+              title={title}
+              bordered={false} // TODO: make it firestore
+            >
+              <Button type="primary" size="small">
+                <Link
+                  to={{
+                    pathname: "/submissionTasks",
+                    state: {
+                      title: title,
+                    },
+                  }}
+                >
+                  View Details
+                </Link>
+              </Button>
+            </Card>
+          </Col>
+        ))}
+        {/* </Row> */}
+      </div>
+    </>
   );
 };
