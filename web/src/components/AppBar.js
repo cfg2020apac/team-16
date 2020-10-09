@@ -32,8 +32,7 @@ export const AppBar = ({ children, location }) => {
             style={{ height: "100%", borderRight: 0 }}
           >
             <SubMenu key="sub1" icon={<ProjectOutlined />} title="Programs">
-              <Menu.Item key="1">Create Event</Menu.Item>
-              <Menu.Item key="/events"><Link to="/calendar">Events</Link></Menu.Item>
+              <Menu.Item key="/calendar"><Link to="/calendar">Events</Link></Menu.Item>
               <Menu.Item key="/progress"><Link to="/progress">Progress</Link></Menu.Item>
               <Menu.Item key="/submissions">
                 <Link to="/submissions">Submissions</Link>
