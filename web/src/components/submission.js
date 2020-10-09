@@ -12,6 +12,7 @@ export const submission = () => {
                 <Button
                 type="primary"
                 size="small"
+                // // TODO: onClick={should redirect to /SubmissionTasks}
                 >
                 view details
                 </Button>
