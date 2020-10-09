@@ -18,9 +18,9 @@ export const AppBar = ({ children, location }) => {
       <Header className="header">
         <div className="logo" />
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
+          <Menu.Item key="1">Dashboard</Menu.Item>
+          <Menu.Item key="2">About</Menu.Item>
+          <Menu.Item key="3">Help</Menu.Item>
         </Menu>
       </Header>
       <Layout>
@@ -32,11 +32,8 @@ export const AppBar = ({ children, location }) => {
             style={{ height: "100%", borderRight: 0 }}
           >
             <SubMenu key="sub1" icon={<ProjectOutlined />} title="Programs">
-              <Menu.Item key="1">Create Event</Menu.Item>
-              <Menu.Item key="2">Events</Menu.Item>
-              <Menu.Item key="/progress">
-                <Link to="/progress">Progress</Link>
-              </Menu.Item>
+              <Menu.Item key="/calendar"><Link to="/calendar">Events</Link></Menu.Item>
+              <Menu.Item key="/progress"><Link to="/progress">Progress</Link></Menu.Item>
               <Menu.Item key="/submissions">
                 <Link to="/submissions">Submissions</Link>
               </Menu.Item>
