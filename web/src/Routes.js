@@ -9,6 +9,8 @@ import { ProjectProgress } from "./components/Progress";
 import { Submission } from "./components/submission"
 import { SubmissionTasks } from "./components/SubmissionTasks"
 import { viewSubmissions } from "./components/viewSubmissions"
+import Volunteers from "./components/Volunteers"
+import VolunteerApplications from "./components/VolunteerApplications"
 
 export const Routes = () => {
   return (
@@ -23,6 +25,8 @@ export const Routes = () => {
           <Route exact path="/submissions" component={Submission} />
           <Route path="/submissionTasks" component={SubmissionTasks} />
           <Route path="/viewSubmissions" component={viewSubmissions} />
+          <Route exact path="/volunteers" component={Volunteers} />
+          <Route exact path="/volunteerApplications" component={VolunteerApplications} />
         </AppBar>
       </Switch>
     </Router>
