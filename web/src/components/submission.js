@@ -1,6 +1,23 @@
 import React from "react";
-import { Space, Button, Card, Col, Row } from "antd";
+import { Button, Card, Col, Row } from "antd";
 import { FirebaseDB } from "../firebase";
+
+
+  function getPrograms() {
+    let projRef = FirebaseDB.collection("projects");
+    let programs = [];
+    projRef.get().then((snapshot) => {
+      Promise.all(
+        snapshot.docs.map((child) => {
+          let data = child.data();
+          programs.push(data.name);
+        })
+      );
+
+    return programs;
+    })
+  }
+programs = getPrograms();
 
 export const submission = () => {
     return (
@@ -8,7 +25,8 @@ export const submission = () => {
         <Row gutter={16}
              style={{ marginBottom: 16 }}>
         <Col span={8}>
-            <Card title="Program 1" bordered={false}>
+            <Card title="Program 1" bordered={false} // TODO: make it firestore
+            >
                 <Button
                 type="primary"
                 size="small"
@@ -55,3 +73,4 @@ export const submission = () => {
     </div>
     );
 };
+
