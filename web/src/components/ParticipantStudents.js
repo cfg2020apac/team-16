@@ -1,6 +1,7 @@
 import React from "react";
 import { Tabs } from "antd";
 import ParticipantStudentTable from "./ParticipantStudentTable";
+import AlumniStudentTable from "./AlumniStudentTable";
 
 const { TabPane } = Tabs;
 
@@ -12,9 +13,7 @@ export const ParticipantStudents = () => {
           <ParticipantStudentTable />
         </TabPane>
         <TabPane tab="Alumni" key="2">
-          <p>Content of Tab Pane 2</p>
-          <p>Content of Tab Pane 2</p>
-          <p>Content of Tab Pane 2</p>
+          <AlumniStudentTable />
         </TabPane>
       </Tabs>
     </div>

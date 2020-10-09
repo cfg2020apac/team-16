@@ -47,7 +47,7 @@ export const AppBar = ({ children, location }) => {
               title="Volunteers"
             >
               <Menu.Item key="9">Applicants</Menu.Item>
-              <Menu.Item key="10">Participants</Menu.Item>
+              <Menu.Item key="/volunteers"><Link to="/volunteers">Participants</Link></Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
