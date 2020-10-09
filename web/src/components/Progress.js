@@ -1,5 +1,5 @@
-import React from "react"
-import { Collapse } from 'antd';
+import React from "react";
+import { Collapse, Progress, Row, Col, Space } from "antd";
 
 const { Panel } = Collapse;
 
@@ -14,22 +14,51 @@ const text = `
 `;
 
 const data = [
-    { 
-        title: "Planning with Purpose"
-    }, 
-]
+  {
+    title: "Planning with Purpose",
+    period: "09/2019 - 12/2019",
+    progress: 60,
+  },
+  {
+    title: "Finance for Future",
+    period: "06/2019 - 12/2019",
+    progress: 30,
+  },
+];
 
-export const ProjectProgress = () => { 
-    
-    return(
-        <Collapse defaultActiveKey={['1']} onChange={callback}>
-        {
-            data.map(project =>  
-                <Panel showArrow={false} header={project.title} key="1">
-                    <p>{text}</p>
-                </Panel>
-            )
-        } 
-        </Collapse>
-    )
-}
+const extra = (percent) => (
+  <div style={{ width: "500px", display: "flex" }}>
+    <Progress percent={percent} />
+  </div>
+);
+
+const header = ({ title, period, progress }) => (
+    <Row justify="space-between" align="middle">
+      <Col xs={2} sm={4} md={6} lg={8} xl={10} style={{ fontSize: "24px" }}>
+        {title}
+      </Col>
+      <Col xs={20} sm={16} md={12} lg={8} xl={4}>
+        {period}
+      </Col>
+      <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+        <Progress percent={progress} />
+      </Col>
+    </Row>
+);
+
+export const ProjectProgress = () => {
+  return (
+    <Collapse defaultActiveKey={data[0].title} onChange={callback}>
+      {data.map((project) => (
+        <Panel
+          showArrow={false}
+          header={header(project)}
+          key={project.title}
+          //   extra={extra(project.progress)}
+        >
+          <p>{text}</p>
+        </Panel>
+      ))}
+    </Collapse>
+  );
+};
