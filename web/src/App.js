@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { AppBar } from "./AppBar";
 import AboutComponent from "./components/AboutComponent"
+import CalendarComponent from "./components/CalendarComponent"
 
 function App() {
   return (
