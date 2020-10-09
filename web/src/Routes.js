@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { AppBar } from "./AppBar";
+import { AppBar } from "./components/AppBar";
 import { Home } from "./components/Home";
 import { ParticipantStudents } from "./components/ParticipantStudents";
-import { CalendarComponent } from "./components/CalendarComponent";
-import { AnotherCalendarComponent } from "./components/AnotherCalendarComponent";
+import CalendarComponent from "./components/CalendarComponent";
+import AnotherCalendarComponent from "./components/AnotherCalendarComponent";
 
 export const Routes = () => {
   return (
