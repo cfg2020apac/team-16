@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
 import {
   UserOutlined,
@@ -9,7 +9,7 @@ import {
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
-export const AppBar = () => {
+export const AppBar = ({children}) => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Header className="header">
@@ -66,7 +66,7 @@ export const AppBar = () => {
               minHeight: 280,
             }}
           >
-            Content
+            {children}
           </Content>
         </Layout>
       </Layout>

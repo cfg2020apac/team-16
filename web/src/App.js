@@ -1,22 +1,13 @@
 import React from "react";
 import { Button } from 'antd';
 import "./App.less";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import { AppBar } from "./AppBar";
-import AboutComponent from "./components/AboutComponent"
+import { Routes } from "./Routes";
 
 function App() {
   return (
-    <Router>
       <div className="App">
-        <AppBar/>
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/about" component={AboutComponent} />
-        </Switch>
+        <Routes/>
       </div>
-    </Router>
   );
 }
 
