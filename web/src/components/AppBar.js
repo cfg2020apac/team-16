@@ -33,10 +33,8 @@ export const AppBar = ({ children, location }) => {
           >
             <SubMenu key="sub1" icon={<ProjectOutlined />} title="Programs">
               <Menu.Item key="1">Create Event</Menu.Item>
-              <Menu.Item key="2">Events</Menu.Item>
-              <Menu.Item key="/progress">
-                <Link to="/progress">Progress</Link>
-              </Menu.Item>
+              <Menu.Item key="/events"><Link to="/calendar">Events</Link></Menu.Item>
+              <Menu.Item key="/progress"><Link to="/progress">Progress</Link></Menu.Item>
               <Menu.Item key="/submissions">
                 <Link to="/submissions">Submissions</Link>
               </Menu.Item>

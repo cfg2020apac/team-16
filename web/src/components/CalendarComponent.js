@@ -2,9 +2,19 @@ import React from 'react';
 import BigCalendar from 'react-big-calendar-like-google';
 import moment from 'moment';
 import "react-big-calendar-like-google/lib/css/react-big-calendar.css"
-import events from './events';
 import { Row, Col, Form, DatePicker, Button, Select, Input } from "antd";
 import 'antd/dist/antd.css';
+import { getEvents } from "../googleCalendar";
+import googleCalendarConfig from "../constants/googleCalendar";
+
+const {
+    clientId,
+    apiKey,
+    discoveryDocs,
+    scopes,
+    calendarId
+} = googleCalendarConfig;
+
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -38,6 +48,10 @@ const config = {
 };
 
 const TimeRelatedForm = () => {
+    let gapi = window.gapi
+
+
+
     const onFinish = (fieldsValue) => {
         // Should format date value before submit.
         const values = {
@@ -46,6 +60,81 @@ const TimeRelatedForm = () => {
             'end-date-time': fieldsValue['end-date-time'].format('YYYY-MM-DD HH:mm:ss'),
         };
         console.log('Received values of form: ', values);
+
+        let event = {
+            'summary': values["event-name"],
+            'description': values.description,
+            'start': {
+                'dateTime': values["start-date-time"],
+                'timeZone': 'America/Los_Angeles'
+            },
+            'end': {
+                'dateTime': values["end-date-time"],
+                'timeZone': 'America/Los_Angeles'
+            },
+            'recurrence': [
+                'RRULE:FREQ=DAILY;COUNT=2'
+            ],
+            'reminders': {
+                'useDefault': false,
+                'overrides': [
+                    { 'method': 'email', 'minutes': 24 * 60 },
+                    { 'method': 'popup', 'minutes': 10 }
+                ]
+            }
+        }
+        // var event = {
+        //     'summary': 'Awesome Event!',
+        //     'location': '800 Howard St., San Francisco, CA 94103',
+        //     'description': 'Really great refreshments',
+        //     'start': {
+        //         'dateTime': '2020-06-28T09:00:00-07:00',
+        //         'timeZone': 'America/Los_Angeles'
+        //     },
+        //     'end': {
+        //         'dateTime': '2020-06-28T17:00:00-07:00',
+        //         'timeZone': 'America/Los_Angeles'
+        //     },
+        //     'recurrence': [
+        //         'RRULE:FREQ=DAILY;COUNT=2'
+        //     ],
+        //     'attendees': [
+        //         { 'email': 'lpage@example.com' },
+        //         { 'email': 'sbrin@example.com' }
+        //     ],
+        //     'reminders': {
+        //         'useDefault': false,
+        //         'overrides': [
+        //             { 'method': 'email', 'minutes': 24 * 60 },
+        //             { 'method': 'popup', 'minutes': 10 }
+        //         ]
+        //     }
+        // }
+
+        gapi.load("client:auth2", () => {
+            console.log("Loaded client");
+
+            gapi.client.init({
+                apiKey: apiKey,
+                clientId: clientId,
+                discoveryDocs: discoveryDocs,
+                scope: scopes,
+            });
+
+            gapi.client.load("calendar", "v3", () => console.log("bam!"));
+
+            gapi.auth2.getAuthInstance().signIn().then(() => {
+                let request = gapi.client.calendar.events.insert({
+                    'calendarId': calendarId,
+                    'resource': event,
+                })
+
+                request.execute(event => {
+                    console.log(event);
+                    window.open(event.htmlLink);
+                })
+            });
+        });
     };
 
     return (
@@ -103,14 +192,24 @@ const TimeRelatedForm = () => {
 };
 
 class CalendarComponent extends React.Component {
-    state = {
-        collapsed: false,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            events: []
+        };
+    }
+
+    componentDidMount() {
+        getEvents(events => {
+            this.setState({ events });
+        });
+        console.log(this.state.events);
+    }
 
     render() {
         return (
             <Row>
-                <Col span={18} style={{ minHeight: '70vh' }}><BigCalendar events={events} /></Col>
+                <Col span={18} style={{ minHeight: '70vh' }}><BigCalendar events={this.state.events} /></Col>
                 <Col span={6} style={{ marginTop: 100 }}><TimeRelatedForm /></Col>
             </Row>
         );
