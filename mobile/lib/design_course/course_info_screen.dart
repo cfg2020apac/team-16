@@ -41,6 +41,35 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     });
   }
 
+void _showcontent() {
+    showDialog(
+      context: context, barrierDismissible: false, // user must tap button!
+
+      builder: (BuildContext context) {
+        return new AlertDialog(
+          title: new Text('Submitted'),
+          content: new SingleChildScrollView(
+            child: new ListBody(
+              children: [
+                new Text('Thanks for submitting. \n\n+250 points'),
+              ],
+            ),
+          ),
+          actions: [
+            new FlatButton(
+              child: new Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final double tempHeight = MediaQuery.of(context).size.height -
@@ -95,7 +124,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             padding: const EdgeInsets.only(
                                 top: 32.0, left: 18, right: 16),
                             child: Text(
-                              'Web Design\nCourse',
+                              'Reflection\nAssignment',
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
@@ -176,7 +205,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                   ),
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: ()=>AlertDialog(),
+                                      onTap: _showcontent,
                                       child: Container(
                                         height: 48,
                                         decoration: BoxDecoration(

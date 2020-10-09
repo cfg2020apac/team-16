@@ -30,14 +30,15 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
                 decoration: new InputDecoration.collapsed(
-                    hintText: "Talk to virtual assistant...",
-                    ),
+                  hintText: "Talk to virtual assistant...",
+                ),
               ),
             ),
             new Container(
               margin: new EdgeInsets.symmetric(horizontal: 4.0),
               child: new IconButton(
-                  icon: new Icon(Icons.send, color: DesignCourseAppTheme.nearlyBlue),
+                  icon: new Icon(Icons.send,
+                      color: DesignCourseAppTheme.nearlyBlue),
                   onPressed: () => _handleSubmitted(_textController.text)),
             ),
           ],
@@ -62,10 +63,10 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
     setState(() {
       _messages.insert(0, message);
     });
-      await flutterTts.setLanguage("en-US");
-      await flutterTts.setPitch(1);
-      await flutterTts.setSpeechRate(1);
-      await flutterTts.speak(message.text);
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1);
+    await flutterTts.setSpeechRate(1);
+    await flutterTts.speak(message.text);
   }
 
   void _handleSubmitted(String text) {
@@ -84,7 +85,12 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(title: Text("Virtual Assistant", style: TextStyle(color: DesignCourseAppTheme.darkText)), backgroundColor: Colors.white),
+      appBar: AppBar(
+          title: Text("Virtual Assistant",
+              style: TextStyle(
+                  color: DesignCourseAppTheme.darkText,
+                  fontFamily: "WorkSans")),
+          backgroundColor: Colors.white),
       body: new Column(children: <Widget>[
         new Flexible(
             child: new ListView.builder(
@@ -124,14 +130,11 @@ class ChatMessage extends StatelessWidget {
           children: <Widget>[
             new Text(this.name,
                 style: new TextStyle(
-                    fontWeight: FontWeight.bold,
-                   )),
+                  fontWeight: FontWeight.bold,
+                )),
             new Container(
               margin: const EdgeInsets.only(top: 5.0, right: 10.0),
-              child: new Text(text,
-                  style: new TextStyle(
-                     
-                      )),
+              child: new Text(text, style: new TextStyle()),
             ),
           ],
         ),
@@ -147,14 +150,11 @@ class ChatMessage extends StatelessWidget {
           children: <Widget>[
             new Text(this.name,
                 style: new TextStyle(
-                    fontWeight: FontWeight.bold,
-            )),
+                  fontWeight: FontWeight.bold,
+                )),
             new Container(
               margin: const EdgeInsets.only(top: 5.0),
-              child: new Text(text,
-                  style: new TextStyle(
-                      
-              )),
+              child: new Text(text, style: new TextStyle()),
             ),
           ],
         ),
@@ -162,14 +162,12 @@ class ChatMessage extends StatelessWidget {
       new Container(
         margin: const EdgeInsets.only(left: 16.0),
         child: new CircleAvatar(
-           backgroundColor: DesignCourseAppTheme.nearlyBlue,
+            backgroundColor: DesignCourseAppTheme.nearlyBlue,
             child: new Text(
-          this.name[0],
-          style: new TextStyle(
-              fontWeight: FontWeight.bold,
-            
-              color: Colors.white),
-        )),
+              this.name[0],
+              style: new TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white),
+            )),
       ),
     ];
   }

@@ -5,6 +5,7 @@ import 'package:best_flutter_ui_templates/design_course/programs.dart';
 import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/material.dart';
 import 'design_course_app_theme.dart';
+import 'package:wave_progress_widget/wave_progress.dart';
 
 class DesignCourseHomeScreen extends StatefulWidget {
   @override
@@ -13,7 +14,6 @@ class DesignCourseHomeScreen extends StatefulWidget {
 
 class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
   CategoryType categoryType = CategoryType.ui;
- 
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  height: MediaQuery.of(context).size.height+100,
+                  height: MediaQuery.of(context).size.height + 100,
                   child: Column(
                     children: <Widget>[
                       getSearchBarUI(),
@@ -45,7 +45,6 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             ),
           ],
         ),
-       
       ),
     );
   }
@@ -55,46 +54,65 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
-          child: Row(
-            children: [
-              Text(
-                'Your Program Progress',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 22,
-                  letterSpacing: 0.27,
-                  color: DesignCourseAppTheme.darkerText,
-                ),
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Your Program Progress',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                          letterSpacing: 0.27,
+                          color: DesignCourseAppTheme.darkerText,
+                        ),
+                      ),
+                      Text(
+                        '50%',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 30,
+                          letterSpacing: 0.27,
+                          color: DesignCourseAppTheme.nearlyBlue,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              child: SizedBox(),
+            ),
+            WaveProgress(80, DesignCourseAppTheme.nearlyBlue.withOpacity(0.4),
+                DesignCourseAppTheme.nearlyBlue, 50),
+            Expanded(
+              child: SizedBox(),
+            ),
+          ],
         ),
-        const SizedBox(
-          height: 16,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
-          child: LinearProgressIndicator(backgroundColor: DesignCourseAppTheme.nearlyBlue, value: 0.8, minHeight: 16),
-        ),
-       
         const SizedBox(
           height: 16,
         ),
         Padding(
           padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
           child: Text(
-                  'Next To Do',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 22,
-                    letterSpacing: 0.27,
-                    color: DesignCourseAppTheme.darkerText,
-                  ),
-                ),
+            'Next To Do',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 22,
+              letterSpacing: 0.27,
+              color: DesignCourseAppTheme.darkerText,
+            ),
+          ),
         ),
         CategoryListView(
           callBack: () {
@@ -309,45 +327,46 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     );
   }
 }
- Widget getAppBarUI() {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'Hello',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                  letterSpacing: 0.2,
-                  color: DesignCourseAppTheme.grey,
-                ),
+
+Widget getAppBarUI() {
+  return Row(
+    children: <Widget>[
+      Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Hello',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+                letterSpacing: 0.2,
+                color: DesignCourseAppTheme.grey,
               ),
-              Text(
-                'Chan Tai Man',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                  letterSpacing: 0.27,
-                  color: DesignCourseAppTheme.darkerText,
-                ),
+            ),
+            Text(
+              'Chan Tai Man',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                letterSpacing: 0.27,
+                color: DesignCourseAppTheme.darkerText,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        Container(
-          width: 60,
-          height: 60,
-          child: Image.asset('assets/design_course/userImage.png'),
-        )
-      ],
-    );
-  }
+      ),
+      Container(
+        width: 60,
+        height: 60,
+        child: Image.asset('assets/design_course/userImage.png'),
+      )
+    ],
+  );
+}
 
 enum CategoryType {
   ui,
