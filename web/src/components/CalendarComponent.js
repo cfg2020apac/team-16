@@ -2,9 +2,9 @@ import React from 'react';
 import BigCalendar from 'react-big-calendar-like-google';
 import moment from 'moment';
 import "react-big-calendar-like-google/lib/css/react-big-calendar.css"
-import events from './events';
 import { Row, Col, Form, DatePicker, Button, Select, Input } from "antd";
 import 'antd/dist/antd.css';
+import { getEvents } from "../googleCalendar";
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -103,14 +103,24 @@ const TimeRelatedForm = () => {
 };
 
 class CalendarComponent extends React.Component {
-    state = {
-        collapsed: false,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            events: []
+        };
+    }
+
+    componentDidMount() {
+        getEvents(events => {
+            this.setState({ events });
+        });
+        console.log(this.state.events);
+    }
 
     render() {
         return (
             <Row>
-                <Col span={18} style={{ minHeight: '70vh' }}><BigCalendar events={events} /></Col>
+                <Col span={18} style={{ minHeight: '70vh' }}><BigCalendar events={this.state.events} /></Col>
                 <Col span={6} style={{ marginTop: 100 }}><TimeRelatedForm /></Col>
             </Row>
         );
