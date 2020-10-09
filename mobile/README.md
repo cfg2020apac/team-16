@@ -1,4 +1,4 @@
-# best_flutter_ui_templates
+# JAHK App
 
 A new Flutter project.
 
