@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AppBar } from "./components/AppBar";
 import { Home } from "./components/Home";
 import { ParticipantStudents } from "./components/ParticipantStudents";
+import CalendarComponent from "./components/CalendarComponent";
+import AnotherCalendarComponent from "./components/AnotherCalendarComponent";
 import { ProjectProgress } from "./components/Progress";
 
 export const Routes = () => {
@@ -10,7 +12,9 @@ export const Routes = () => {
     <Router>
       <Switch>
         <AppBar>
-          <Route exact path="/" component={Home} />
+          <Route path="/" exact component={Home} />
+          <Route path="/calendar" component={CalendarComponent} />
+          <Route path="/anothercalendar" component={AnotherCalendarComponent} />
           <Route exact path="/students/participants" component={ParticipantStudents} />
           <Route exact path="/progress" component={ProjectProgress} />
         </AppBar>
