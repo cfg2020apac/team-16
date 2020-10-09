@@ -5,6 +5,7 @@ import 'package:best_flutter_ui_templates/fitness_app/fintness_app_theme.dart';
 import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/material.dart';
 import 'design_course_app_theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Program extends StatefulWidget {
   @override
@@ -12,6 +13,16 @@ class Program extends StatefulWidget {
 }
 
 class _ProgramState extends State<Program> {
+  _launchURL() async {
+    const url =
+        'https://drive.google.com/drive/folders/1U0W-dHpn7QTX8HJEY1xMulqGrIEKTHeY?usp=sharing';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,33 +144,92 @@ class _ProgramState extends State<Program> {
               ),
             ),
             SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  RaisedButton(
-                    onPressed: () => {},
-                    elevation: 0,
-                    color: Color(0xff60A881).withOpacity(0.4),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
-                      child: Row(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Container(child: Icon(Icons.play_arrow_rounded),),
-                              Text(
-                                "01",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ],
+            new Container(
+              child: GestureDetector(
+                onTap: _launchURL,
+                child: new Card(
+                  elevation: 5,
+                  child: new Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      new ListTile(
+                        leading: new Icon(Icons.plagiarism_sharp,
+                            size: 40.0, color: Colors.grey),
+                        title: new Text(
+                          "Seminar Recording",
+                          style: new TextStyle(fontSize: 20.0),
+                        ),
+                        subtitle: const Text('rec_sem.mp4'),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
+              ),
+            ),
+            new Container(
+              child: GestureDetector(
+                onTap: _launchURL,
+                child: new Card(
+                  elevation: 5,
+                  child: new Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      new ListTile(
+                        leading: new Icon(Icons.dashboard_customize,
+                            size: 40.0, color: Colors.grey),
+                        title: new Text(
+                          "Evaluation WS",
+                          style: new TextStyle(fontSize: 20.0),
+                        ),
+                        subtitle: const Text('evaluation.doc'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            new Container(
+              child: GestureDetector(
+                onTap: _launchURL,
+                child: new Card(
+                  elevation: 5,
+                  child: new Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      new ListTile(
+                        leading: new Icon(Icons.dashboard_customize,
+                            size: 40.0, color: Colors.grey),
+                        title: new Text(
+                          "Excel Solutions",
+                          style: new TextStyle(fontSize: 20.0),
+                        ),
+                        subtitle: const Text('solutions.xlsx'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            new Container(
+              child: GestureDetector(
+                onTap: _launchURL,
+                child: new Card(
+                  elevation: 5,
+                  child: new Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      new ListTile(
+                        leading: new Icon(Icons.folder,
+                            size: 40.0, color: Colors.grey),
+                        title: new Text(
+                          "Workshop Examples",
+                          style: new TextStyle(fontSize: 20.0),
+                        ),
+                        subtitle: const Text('Details'),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
