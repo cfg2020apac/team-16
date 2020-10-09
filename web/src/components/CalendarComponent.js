@@ -3,10 +3,8 @@ import BigCalendar from 'react-big-calendar-like-google';
 import moment from 'moment';
 import "react-big-calendar-like-google/lib/css/react-big-calendar.css"
 import events from './events';
-import { Layout, Row, Col, Form, DatePicker, TimePicker, Button, Space } from "antd";
+import { Row, Col, Form, DatePicker, Button, Select, Input } from "antd";
 import 'antd/dist/antd.css';
-
-const { RangePicker } = DatePicker;
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -33,18 +31,8 @@ const formItemLayout = {
 const config = {
     rules: [
         {
-            type: 'object',
             required: true,
-            message: 'Please select time!',
-        },
-    ],
-};
-const rangeConfig = {
-    rules: [
-        {
-            type: 'array',
-            required: true,
-            message: 'Please select time!',
+            message: 'Please fill it in!',
         },
     ],
 };
@@ -52,42 +40,47 @@ const rangeConfig = {
 const TimeRelatedForm = () => {
     const onFinish = (fieldsValue) => {
         // Should format date value before submit.
-        const rangeValue = fieldsValue['range-picker'];
-        const rangeTimeValue = fieldsValue['range-time-picker'];
         const values = {
             ...fieldsValue,
-            'date-picker': fieldsValue['date-picker'].format('YYYY-MM-DD'),
-            'date-time-picker': fieldsValue['date-time-picker'].format('YYYY-MM-DD HH:mm:ss'),
-            'month-picker': fieldsValue['month-picker'].format('YYYY-MM'),
-            'range-picker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')],
-            'range-time-picker': [
-                rangeTimeValue[0].format('YYYY-MM-DD HH:mm:ss'),
-                rangeTimeValue[1].format('YYYY-MM-DD HH:mm:ss'),
-            ],
-            'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
+            'start-date-time': fieldsValue['start-date-time'].format('YYYY-MM-DD HH:mm:ss'),
+            'end-date-time': fieldsValue['end-date-time'].format('YYYY-MM-DD HH:mm:ss'),
         };
         console.log('Received values of form: ', values);
     };
 
     return (
         <Form name="time_related_controls" {...formItemLayout} onFinish={onFinish}>
-            <Form.Item name="date-picker" label="DatePicker" {...config}>
-                <DatePicker />
+            <Form.Item name="event-name" label="Event Name">
+                <Input />
             </Form.Item>
-            <Form.Item name="date-time-picker" label="DatePicker[showTime]" {...config}>
+            <Form.Item name="start-date-time" label="Start Time" {...config}>
                 <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
             </Form.Item>
-            <Form.Item name="month-picker" label="MonthPicker" {...config}>
-                <DatePicker picker="month" />
+            <Form.Item name="end-date-time" label="End Time" {...config}>
+                <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
             </Form.Item>
-            <Form.Item name="range-picker" label="RangePicker" {...rangeConfig}>
-                <RangePicker />
+            <Form.Item name="program-select" label="Program Select" {...config}>
+                <Select>
+                    <Select.Option value="program-1">Program 1</Select.Option>
+                    <Select.Option value="program-2">Program 2</Select.Option>
+                    <Select.Option value="program-3">Program 3</Select.Option>
+                    <Select.Option value="program-4">Program 4</Select.Option>
+                    <Select.Option value="program-5">Program 5</Select.Option>
+                    <Select.Option value="program-6">Program 6</Select.Option>
+                    <Select.Option value="program-7">Program 7</Select.Option>
+                    <Select.Option value="program-8">Program 8</Select.Option>
+                    <Select.Option value="program-9">Program 9</Select.Option>
+                    <Select.Option value="program-10">Program 10</Select.Option>
+                    <Select.Option value="program-11">Program 11</Select.Option>
+                    <Select.Option value="program-12">Program 12</Select.Option>
+                    <Select.Option value="program-13">Program 13</Select.Option>
+                    <Select.Option value="program-14">Program 14</Select.Option>
+                    <Select.Option value="program-15">Program 15</Select.Option>
+                    <Select.Option value="program-16">Program 16</Select.Option>
+                </Select>
             </Form.Item>
-            <Form.Item name="range-time-picker" label="RangePicker[showTime]" {...rangeConfig}>
-                <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" />
-            </Form.Item>
-            <Form.Item name="time-picker" label="TimePicker" {...config}>
-                <TimePicker />
+            <Form.Item name={['description']} label="Description">
+                <Input.TextArea />
             </Form.Item>
             <Form.Item
                 wrapperCol={{
@@ -101,9 +94,9 @@ const TimeRelatedForm = () => {
                     },
                 }}
             >
-            <Button type="primary" htmlType="submit">
-                Submit
-            </Button>
+                <Button type="primary" htmlType="submit">
+                    Submit
+                </Button>
             </Form.Item>
         </Form>
     );
