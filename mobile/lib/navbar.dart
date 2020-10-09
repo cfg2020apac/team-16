@@ -1,5 +1,7 @@
 import 'package:best_flutter_ui_templates/design_course/design_course_app_theme.dart';
+import 'package:best_flutter_ui_templates/design_course/forum.dart';
 import 'package:best_flutter_ui_templates/design_course/profile.dart';
+import 'package:best_flutter_ui_templates/fitness_app/bot.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:best_flutter_ui_templates/design_course/home_design_course.dart';
@@ -14,8 +16,8 @@ class _NavBarState extends State<NavBar> {
   final _pageoption = [
     DesignCourseHomeScreen(),
     Program(),
-    Program(),
-    DesignCourseHomeScreen(),
+    HomePageDialogflow(),
+    Forum(),
     Profile(),
   ];
 
