@@ -1,8 +1,10 @@
 import React from "react";
-import { Table, Button, Progress } from "antd";
+import { Table, Button, Progress, Modal, Input } from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import { createFromIconfontCN } from "@ant-design/icons";
 import { FirebaseDB } from "../firebase";
+
+const { TextArea } = Input;
 
 const IconFont = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js",
@@ -83,6 +85,11 @@ class ParticipantStudentTable extends React.Component {
     selectedRowKeys: [], // Check here to configure the default column
     loading: false,
     students: [],
+    ModalText: "Content of the modal",
+    visible: false,
+    confirmLoading: false,
+    subject: "",
+    body: "",
   };
 
   start = () => {
@@ -133,14 +140,67 @@ class ParticipantStudentTable extends React.Component {
     });
   }
 
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = () => {
+    this.setState({
+      confirmLoading: true,
+    });
+    const { selectedRowKeys, subject, body } = this.state;
+    const requestBody = {
+      email: selectedRowKeys,
+      subject: subject,
+      body: body,
+    };
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        dataType: "json",
+        xhrFields: {
+          withCredentials: true,
+        },
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+      },
+      body: requestBody, 
+    };
+    fetch("http://127.0.0.1:5000/send_message", requestOptions).then(
+      (result) => {
+        console.log("result");
+        this.setState({
+          visible: false,
+          confirmLoading: false,
+        });
+      }
+    );
+  };
+
+  handleCancel = () => {
+    console.log("Clicked cancel button");
+    this.setState({
+      visible: false,
+    });
+  };
+
   render() {
-    const { loading, selectedRowKeys, students, changed } = this.state;
+    const {
+      loading,
+      selectedRowKeys,
+      students,
+      changed,
+      visible,
+      confirmLoading,
+      ModalText,
+    } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
     };
     const hasSelected = selectedRowKeys.length > 0;
-    console.log(this.state);
     return (
       <div>
         <div
@@ -167,9 +227,30 @@ class ParticipantStudentTable extends React.Component {
               icon={<MailOutlined />}
               size="large"
               style={{ marginRight: "10px" }}
+              onClick={this.showModal}
             >
               Send Email
             </Button>
+            <Modal
+              title="Email Content"
+              visible={visible}
+              onOk={this.handleOk}
+              confirmLoading={confirmLoading}
+              onCancel={this.handleCancel}
+            >
+              <Input
+                placeholder="Subject"
+                value={this.state.subject}
+                onChange={(e) => this.setState({ subject: e.target.value })}
+                style={{ marginBottom: "5px" }}
+              />
+              <TextArea
+                placeholder="Body"
+                value={this.state.body}
+                rows={15}
+                onChange={(e) => this.setState({ body: e.target.value })}
+              />
+            </Modal>
             <Button
               type="primary"
               icon={<IconFont type="icon-facebook" />}
