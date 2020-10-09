@@ -1,3 +1,4 @@
+from datetime import date
 import logging
 from flask import Flask, request, jsonify, render_template
 import pandas as pd
@@ -7,6 +8,8 @@ app = Flask(__name__)
 
 @app.route("/generate_certificate", methods=['GET', 'POST'])
 def generate_certificate():
+    today = date.today()
+    dayform = today.strftime("%B %d, %Y")
     request_data = request.get_json()
 
     new_store = {
@@ -30,11 +33,18 @@ def generate_certificate():
         d1 = ImageDraw.Draw(im)
         location1 = (300, 313)
         text_color1 = (0, 100, 188)
-        font1 = ImageFont.truetype("Arial.ttf", 50)
+        font1 = ImageFont.truetype("Arial.ttf", 20)
         d1.text(location1, "Thank you", fill = text_color1, font = font1)
+
+        d2 = ImageDraw.Draw(im)
+        location2 = (300, 270)
+        text_color2 = (0, 100, 90)
+        font2 = ImageFont.truetype("Arial.ttf", 20)
+        d2.text(location2, dayform, fill = text_color2, font = font2)
+
         im.save("certificate_" + i + ".pdf")
 
-    return "generated"
+    return "Generated"
 
 #submit()
 if __name__ == '__main__':
