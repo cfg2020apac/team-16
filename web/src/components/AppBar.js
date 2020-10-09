@@ -17,7 +17,7 @@ export const AppBar = ({ children, location }) => {
     <Layout style={{ minHeight: "100vh" }}>
       <Header className="header">
         <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
           <Menu.Item key="1">Dashboard</Menu.Item>
           <Menu.Item key="2">About</Menu.Item>
           <Menu.Item key="3">Help</Menu.Item>
@@ -46,17 +46,12 @@ export const AppBar = ({ children, location }) => {
               icon={<NotificationOutlined />}
               title="Volunteers"
             >
-              <Menu.Item key="9">Applicants</Menu.Item>
-              <Menu.Item key="10">Participants</Menu.Item>
+              <Menu.Item key="/volunteerApplications"><Link to="/volunteerApplications">Applicants</Link></Menu.Item>
+              <Menu.Item key="/volunteers"><Link to="/volunteers">Participants</Link></Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
         <Layout style={{ padding: "0 24px 24px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
           <Content
             className="site-layout-background"
             style={{

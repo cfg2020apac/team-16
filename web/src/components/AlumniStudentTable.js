@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Button, Progress, Modal, Input, message } from "antd";
+import { Table, Button, Modal, Input, message } from "antd";
 import { MailOutlined, TrophyOutlined } from "@ant-design/icons";
 import { FirebaseDB } from "../firebase";
 
@@ -20,7 +20,7 @@ const columns = [
       },
       {
         text: "Job Shadowing",
-        value: "Job_shadowing",
+        value: "Job Shadowing",
       },
       {
         text: "Planning with Purpose",
@@ -31,21 +31,10 @@ const columns = [
         value: "Personal Spending 101",
       },
     ],
-    onFilter: (value, record) => record.program.indexOf(value) === 0,
-    sorter: (a, b) => a.progress - b.progress,
-    sortDirections: ['descend'],
   },
   {
     title: "Email",
     dataIndex: "email",
-  },
-  {
-    title: "Progress",
-    dataIndex: "progress",
-    sorter: (a, b) => a.progress - b.progress,
-    render: (text, record) => (
-      <Progress percent={record.progress} status="active" />
-    ),
   },
 ];
 
@@ -59,7 +48,7 @@ for (let i = 0; i < 46; i++) {
     email: "kingedward@gmail.com",
   });
 }
-class ParticipantStudentTable extends React.Component {
+class AlumniStudentTable extends React.Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
     loading: false,
@@ -94,7 +83,7 @@ class ParticipantStudentTable extends React.Component {
     let studentRef = FirebaseDB.collection("student");
     let students = [];
     studentRef
-      .where("status", "==", "current")
+      .where("status", "==", "alumni")
       .get()
       .then((snapshot) => {
         Promise.all(
@@ -282,4 +271,4 @@ class ParticipantStudentTable extends React.Component {
   }
 }
 
-export default ParticipantStudentTable;
+export default AlumniStudentTable;
